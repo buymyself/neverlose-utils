@@ -33,6 +33,16 @@ print(utils:numbertobool(1))
 print(utils:numbertobool(0))
 --false
 ```
+## clamp
+### parameters:
+- n [number]
+- min [number]
+- max [number]
+> return [number]
+```lua
+print(utils:clamp(5, 0, 4))
+--4
+```
 
 ## is_module_loaded
 ### parameters:
