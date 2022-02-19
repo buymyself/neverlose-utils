@@ -6,6 +6,7 @@ local utils = require "nl/utils"
 --ready to use.
  ```
 ## contains
+### Check if the value is inside a table.
 ### parameters:
 - v [void]
 - t [table]
@@ -24,6 +25,7 @@ print(utils:contains(3, foo))
 ```
 
 ## numbertobool
+### Turn number into boolean. 1 for true, 0 for false.
 ### parameters:
 - n [number] int 0-1
 > return [boolean] true|false
@@ -34,6 +36,7 @@ print(utils:numbertobool(0))
 --false
 ```
 ## clamp
+### Clamp a number between 2 values.
 ### parameters:
 - n [number]
 - min [number]
@@ -45,6 +48,7 @@ print(utils:clamp(5, 0, 4))
 ```
 
 ## is_module_loaded
+### Check if a module is loaded or not.
 ### parameters:
 - m [string] module
 > return [boolean] true|false
@@ -59,6 +63,7 @@ print(utils:is_module_loaded("nl/entities")) -- I dont have entities.lua module 
 ---false
 ```
 ## printcolor
+### Print colored string into console.
 ### parameters:
 - r [number] int 0 - 255
 - g [number] int 0 - 255
@@ -71,6 +76,7 @@ utils:printcolor(255, 0, 0, 255, "string")
 ![image](https://cdn.discordapp.com/attachments/926558271236603987/944482617489752064/unknown.png)
 
 ## get_nearest_player
+### Find the nearest player between localplayer.
 ### parameters:
 - enemy_only [boolean] true|false
 > return [userdata]
@@ -80,6 +86,7 @@ print(utils:get_nearest_player(true):GetName())
 ```
 
 ## get_all_teammates
+### Get all teammates.
 > return [table] table of userdatas
 ```lua
 local teammates = utils:get_all_teammates()
@@ -94,6 +101,7 @@ userdata = userdata: 0x2457f130 name = Will
 ]]
 ```
 ## get_velocity
+### Get velocity of localplayer.
 ### parameters:
 - entity [userdata]
 > return velocity [number] float
@@ -103,6 +111,7 @@ print(utils:get_velocity(localplayer))
 -- 0 <-- standing rn
 ```
 ## is_visible
+### Check if a player is visible or not [shootable].
 ### parameters:
 - entity [userdata]
 - hitbox [number] int
@@ -132,6 +141,7 @@ Cheat.RegisterCallback("draw", draw)
 ![image](https://cdn.discordapp.com/attachments/913755528809836545/944488542078402590/unknown.png)
 
 ## extrapolate
+### Get extrapolated position.
 ### parameters:
 - entity [number]
 - tick [number]
@@ -144,6 +154,7 @@ local extrapolated = utils:extrapolate(localplayer, 1)
 ```
 
 ## play_sound
+### Play sound media. Supported files: .wav | .mp3 [add after the path]
 ### parameters:
 - path [string]
 - volume [number] int 0 - 1
@@ -152,6 +163,7 @@ utils:play_sound("buttons/switch_press_arena_02", 1)
 ```
 
 ## draw_text_outline
+### Draws a outline behind the text.
 ### parameters:
 - x [number] vector2
 - y [number] vector2
