@@ -1,8 +1,8 @@
 --[[
-    utils.lua
-    for neverlose api
-    
-    author: pred#2448
+    utils for neverlose
+    [for developers]
+
+    @author pred#2448 / pred14
 ]]
 
 local ffi = require "ffi"
@@ -59,7 +59,7 @@ function utils:contains(v, t)
     return false
 end
 
----Fetches all teammates
+---Get all teammates
 ---@return table userdata
 function utils:get_all_teammates()
     local players = EntityList.GetPlayers()
@@ -127,6 +127,22 @@ function utils:get_velocity(entity)
     return m_vecVelocity:Length2D()
 end
 
+---Draw a text with outline
+---@param x number
+---@param y number
+---@param r number 0 - 255
+---@param g number 0 - 255
+---@param b number 0 - 255
+---@param a number 0 - 255
+---@param fs number
+---@param f userdata
+---@param c boolean
+---@param ... string
+function utils:draw_text_outline(x, y, r, g, b, a, fs, f, c, ...)
+    Render.Text(..., Vector2.new(x + 1, y + 1), Color.RGBA(0, 0, 0, a), fs, f, false, c)
+    Render.Text(..., Vector2.new(x, y), Color.RGBA(r, g, b, a), fs, f, false, c)
+end
+
 ---Plays sound
 ---@param path string
 ---@param volume number 0-1 float
@@ -170,6 +186,20 @@ function utils:is_visible(entity, hitbox)
     local entity_head_pos = entity:GetHitboxCenter(hitbox)
     local traced = EngineTrace.TraceRay(eye_pos, entity_head_pos, localplayer, 0x000000FF)
     return traced.fraction == 1
+end
+
+---Turn a number to boolean
+---@param n number
+---@return boolean
+function utils:numbertobool(n)
+    if type(n) ~= "number" then
+        error("[utils] Invalid arguments. Expected number.")
+    end
+    local truefalse = {
+        [0] = false,
+        [1] = true,
+    }
+    return truefalse[n]
 end
 
 ---Print colored message
