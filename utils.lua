@@ -5,20 +5,6 @@
     @author pred#2448 / pred14
 ]]
 
---[[
-    utils for neverlose
-    [mainly for developers]
-
-    @author pred#2448 / pred14
-]]
-
---[[
-    utils for neverlose
-    [mainly for developers]
-
-    @author pred#2448 / pred14
-]]
-
 local ffi = require "ffi"
 local utils = {}
 
