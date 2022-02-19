@@ -72,10 +72,10 @@ function utils:get_all_teammates()
     return teammates
 end
 
----Check if a module missing or not
+---Check if a module loaded or not
 ---@param m string module [path]
 ---@return boolean
-function utils:is_module_exists(m)
+function utils:is_module_loaded(m)
     if type(m) ~= "string" then
         error("[utils] Invalid arguments. Expected string.")
     end
