@@ -179,4 +179,6 @@ Cheat.RegisterCallback("draw", draw)
 - i [number] int
 - ct [string] ctype
 
-###### Please do not sell this or claim this script as yours. @pred14 / pred#2448
+## **Attention!**
+###### **Please do not sell this or claim this script as yours.** 
+###### @pred14 / pred#2448
