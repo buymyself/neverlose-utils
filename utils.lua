@@ -1,3 +1,10 @@
+--[[
+    utils.lua
+    for neverlose api
+    
+    author: pred#2448
+]]
+
 local ffi = require "ffi"
 local utils = {}
 
