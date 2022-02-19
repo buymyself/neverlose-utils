@@ -178,3 +178,5 @@ Cheat.RegisterCallback("draw", draw)
 ### parameters:
 - i [number] int
 - ct [string] ctype
+
+###### Please do not sell this or claim this script as yours.
