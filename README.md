@@ -171,9 +171,9 @@ utils:play_sound("buttons/switch_press_arena_02", 1)
 - g [number] int 0 - 255 green
 - b [number] int 0 - 255 blue
 - a [number] int 0 - 255 alpha
-- fs [number] int font size
-- f [userdata] font
-- c [boolean] true|false centered
+- fontsize [number] int font size
+- font [userdata] font
+- centered [boolean] true|false centered
 - ... [string]
 ```lua
 local FONT_CALIBRI = Render.InitFont("calibri", 18, {"b"})
@@ -183,6 +183,31 @@ end
 Cheat.RegisterCallback("draw", draw)
 ```
 ![image](https://cdn.discordapp.com/attachments/913755528809836545/944494085341839401/unknown.png)
+
+## multicolored_text
+### Draws a text that contains mulitple colors.
+###### Author: [invalidcode232](https://github.com/invalidcode232)
+### parameters:
+- x [number]
+- y [number]
+- centered [boolean] true|false
+- spacing [number]
+- fontsize [number]
+- font [userdata]
+- data [table]
+```lua
+utils:mutlicolored_text(1000, 1000, true, 3, 18, FONT_CALIBRI, {
+    {
+        text = "Hello",
+        clr = {255, 100, 100, 255}
+    },
+    {
+        text = "World",
+        clr = {100, 255, 100, 255}
+    }
+})
+```
+![image](https://user-images.githubusercontent.com/97589600/154813265-647dab76-a375-490b-a4b4-0beee3efc090.png)
 
 ## vtable_entry
 ### parameters:
