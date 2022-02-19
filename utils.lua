@@ -12,6 +12,13 @@
     @author pred#2448 / pred14
 ]]
 
+--[[
+    utils for neverlose
+    [mainly for developers]
+
+    @author pred#2448 / pred14
+]]
+
 local ffi = require "ffi"
 local utils = {}
 
@@ -81,7 +88,6 @@ function utils:is_module_loaded(m)
     end
     return false
 end
-
 
 ---Turn a number to boolean
 ---@param n number
@@ -197,14 +203,45 @@ end
 ---@param g number 0 - 255
 ---@param b number 0 - 255
 ---@param a number 0 - 255
----@param fs number
----@param f userdata
----@param c boolean
+---@param fontsize number
+---@param font userdata
+---@param centered boolean
 ---@param ... string
-function utils:draw_text_outline(x, y, r, g, b, a, fs, f, c, ...)
-    Render.Text(..., Vector2.new(x + 1, y + 1), Color.RGBA(0, 0, 0, a), fs, f, false, c)
-    Render.Text(..., Vector2.new(x, y), Color.RGBA(r, g, b, a), fs, f, false, c)
+function utils:draw_text_outline(x, y, r, g, b, a, fontsize, font, centered, ...)
+    Render.Text(..., Vector2.new(x + 1, y + 1), Color.RGBA(0, 0, 0, a), fontsize, font, false, centered)
+    Render.Text(..., Vector2.new(x, y), Color.RGBA(r, g, b, a), fontsize, font, false, centered)
 end
+
+---Draw a multicolored text
+---@author: Invalidcode | invalidcode232
+---@param x number
+---@param y number
+---@param centered boolean
+---@param spacing number
+---@param fontsize number
+---@param font userdata
+---@param data table
+function utils:mutlicolored_text(x, y, centered, spacing, fontsize, font, data)
+    local total_width = 0
+    local used_width = 0
+    if centered then
+        for _, v in pairs(data) do
+            local text_width = Render.CalcTextSize(v.text, fontsize, font).x
+            total_width = total_width + text_width + spacing
+        end
+    end
+    for _, v in pairs(data) do
+        local text = v.text
+        local clr = v.clr
+
+        local text_width = Render.CalcTextSize(text, fontsize, font).x
+        local cur_x = centered and (x - total_width / 2 + used_width) or x + used_width
+
+        Render.Text(text, Vector2.new(cur_x, y), Color.RGBA(clr[1], clr[2], clr[3], clr[4]), fontsize, font)
+        used_width = used_width + text_width + spacing
+    end
+end
+
 
 ---Plays sound
 ---@param path string
