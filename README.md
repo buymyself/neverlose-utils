@@ -1,5 +1,5 @@
 # documentation
-### To start, simply download utils.lua into your nl folder.
+### To get started, simply download utils.lua into your nl folder.
 ### Example of usage:
 ```lua
 local utils = require "nl/utils"
