@@ -5,6 +5,13 @@
     @author pred#2448 / pred14
 ]]
 
+--[[
+    utils for neverlose
+    [mainly for developers]
+
+    @author pred#2448 / pred14
+]]
+
 local ffi = require "ffi"
 local utils = {}
 
@@ -59,20 +66,7 @@ function utils:contains(v, t)
     return false
 end
 
----Get all teammates
----@return table userdata
-function utils:get_all_teammates()
-    local players = EntityList.GetPlayers()
-    local teammates = {}
-    for _, player in pairs(players) do
-        if player:IsTeamMate() then
-            table.insert(teammates, player)
-        end
-    end
-    return teammates
-end
-
----Check if a module loaded or not
+---Check if a module missing or not
 ---@param m string module [path]
 ---@return boolean
 function utils:is_module_loaded(m)
@@ -87,6 +81,61 @@ function utils:is_module_loaded(m)
     end
     return false
 end
+
+
+---Turn a number to boolean
+---@param n number
+---@return boolean
+function utils:numbertobool(n)
+    if type(n) ~= "number" then
+        error("[utils] Invalid arguments. Expected number.")
+    end
+    local truefalse = {
+        [0] = false,
+        [1] = true,
+    }
+    return truefalse[n]
+end
+
+---Print colored message
+---@param r number 0-255 int
+---@param g number 0-255 int
+---@param b number 0-255 int
+---@param a number 0-255 int
+---@param ... string
+function utils:printcolor(r, g, b, a, ...)
+    if type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number" or type(a) ~= "number" then
+        error("[utils] Invalid arguments. Expected number.")
+    end
+    if r < 0 or r > 255 or g < 0 or g > 255 or b < 0 or b > 255 or a < 0 or a > 255 then
+        error("[utils] Invalid arguments. Expected number between 0 and 255.")
+    end
+    local args = {...}
+    for i, v in pairs(args) do
+        if type(v) ~= "string" then
+            error("[utils] Invalid arguments. Expected string.")
+        end
+        colorprint(v, r, g, b, a)
+    end
+end
+
+---Clamp a number between min and max
+---@param n number
+---@param min number
+---@param max number
+---@return number
+function utils:clamp(n, min, max)
+    if type(n) ~= "number" or type(min) ~= "number" or type(max) ~= "number" then
+        error("[utils] Invalid arguments. Expected number.")
+    end
+    if n < min then
+        return min
+    elseif n > max then
+        return max
+    else
+        return n
+    end
+end 
 
 ---Get nearest player
 ---@param enemy_only boolean
@@ -112,6 +161,20 @@ function utils:get_nearest_player(enemy_only)
     end
     return nearest_player
 end
+
+---Get all teammates
+---@return table userdata
+function utils:get_all_teammates()
+    local players = EntityList.GetPlayers()
+    local teammates = {}
+    for _, player in pairs(players) do
+        if player:IsTeamMate() then
+            table.insert(teammates, player)
+        end
+    end
+    return teammates
+end
+
 
 ---Get entity's velocity
 ---@param entity userdata
@@ -186,42 +249,6 @@ function utils:is_visible(entity, hitbox)
     local entity_head_pos = entity:GetHitboxCenter(hitbox)
     local traced = EngineTrace.TraceRay(eye_pos, entity_head_pos, localplayer, 0x000000FF)
     return traced.fraction == 1
-end
-
----Turn a number to boolean
----@param n number
----@return boolean
-function utils:numbertobool(n)
-    if type(n) ~= "number" then
-        error("[utils] Invalid arguments. Expected number.")
-    end
-    local truefalse = {
-        [0] = false,
-        [1] = true,
-    }
-    return truefalse[n]
-end
-
----Print colored message
----@param r number 0-255 int
----@param g number 0-255 int
----@param b number 0-255 int
----@param a number 0-255 int
----@param ... string
-function utils:printcolor(r, g, b, a, ...)
-    if type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number" or type(a) ~= "number" then
-        error("[utils] Invalid arguments. Expected number.")
-    end
-    if r < 0 or r > 255 or g < 0 or g > 255 or b < 0 or b > 255 or a < 0 or a > 255 then
-        error("[utils] Invalid arguments. Expected number between 0 and 255.")
-    end
-    local args = {...}
-    for i, v in pairs(args) do
-        if type(v) ~= "string" then
-            error("[utils] Invalid arguments. Expected string.")
-        end
-        colorprint(v, r, g, b, a)
-    end
 end
 
 ---@param instance void
