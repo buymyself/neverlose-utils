@@ -1,5 +1,10 @@
 # documentation
-
+### To start, simply download utils.lua into your nl folder.
+### Example of usage:
+```lua
+local utils = require "nl/utils"
+--ready to use.
+ ```
 ## contains
 ### parameters:
 - v [void]
