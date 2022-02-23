@@ -129,8 +129,8 @@ local localplayer = EntityList.GetLocalPlayer()
 print(utils:get_velocity(localplayer))
 -- 0 <-- standing rn
 ```
-## is_visible
-### Check if a player is visible or not [shootable].
+## is_shootable
+### Check if a player is shootable or not.
 ### parameters:
 - entity [userdata]
 - hitbox [number] int
@@ -146,7 +146,7 @@ local function draw()
         local head = 0
         local playerhbcenter = v:GetHitboxCenter(head)
         local hbcenter2d = Render.WorldToScreen(playerhbcenter)
-        local isvisible = utils:is_visible(v, head)
+        local isvisible = utils:is_shootable(v, head)
         local r, g, b = 240, 70, 70
         if isvisible then
             r, g, b = 70, 240, 70
