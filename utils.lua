@@ -1,6 +1,6 @@
 --[[
     utils for neverlose
-    [for developers]
+    [mainly for developers]
 
     @author pred#2448 / pred14
 ]]
@@ -129,58 +129,7 @@ function utils:clamp(n, min, max)
     end
 end 
 
----Get nearest player
----@param enemy_only boolean
----@return userdata
-function utils:get_nearest_player(enemy_only)
-    local players = EntityList.GetPlayers()
-    local localplayer = EntityList.GetLocalPlayer()
-    local localplayer_pos = localplayer:GetProp("m_vecOrigin")
-    local max_dist = 999999
-    local nearest_player = nil
-
-    for i, v  in pairs(players) do
-        local player_vec = v:GetProp("m_vecOrigin")
-        if v == localplayer or v == nil or not v:IsAlive() or v:IsTeamMate() == enemy_only then
-            goto skip
-        end
-        local dist = (player_vec - localplayer_pos):Length()
-        if dist < max_dist then
-            max_dist = dist
-            nearest_player = v
-        end
-        ::skip::
-    end
-    return nearest_player
-end
-
----Get all teammates
----@return table userdata
-function utils:get_all_teammates()
-    local players = EntityList.GetPlayers()
-    local teammates = {}
-    for _, player in pairs(players) do
-        if player:IsTeamMate() then
-            table.insert(teammates, player)
-        end
-    end
-    return teammates
-end
-
-
----Get entity's velocity
----@param entity userdata
----@return number float
-function utils:get_velocity(entity)
-    if type(entity) ~= "userdata" then
-        error("[utils] Invalid arguments. Expected usedata.")
-    end
-    if entity == nil then
-        return 0
-    end
-    local m_vecVelocity = entity:GetProp("m_vecVelocity")
-    return m_vecVelocity:Length2D()
-end
+---@region render
 
 ---Draw a text with outline
 ---@param x number
@@ -228,7 +177,6 @@ function utils:mutlicolored_text(x, y, centered, spacing, fontsize, font, data)
     end
 end
 
-
 ---Plays sound
 ---@param path string
 ---@param volume number 0-1 float
@@ -237,6 +185,30 @@ function utils:play_sound(path, volume)
         error("[utils] Invalid arguments. Expected string and number.")
     end
     EngineClient.ExecuteClientCmd("playvol " .. path .. " " .. volume)
+end
+
+---Checks if the entity is onground
+---@param entity userdata
+---@return boolean
+function utils:is_onground(entity)
+    local m_fFlags = entity:GetProp("DT_BasePlayer", "m_fFlags")
+    return bit.band(m_fFlags, bit.lshift(1, 0)) == 1
+end
+
+---Checks if the entity is inair
+---@param entity userdata
+---@return boolean
+function utils:is_inair(entity)
+    local m_fFlags = entity:GetProp("DT_BasePlayer", "m_fFlags")
+    return bit.band(m_fFlags, bit.lshift(1, 0)) ~= 1
+end
+
+---Checks if the entity is ducking
+---@param entity userdata
+---@return boolean
+function utils:is_ducking(entity)
+    local m_fFlags = entity:GetProp("DT_BasePlayer", "m_fFlags")
+    return bit.band(m_fFlags,  bit.lshift(1, 1)) == 1
 end
 
 ---Gets extrapolated position
@@ -272,6 +244,58 @@ function utils:is_visible(entity, hitbox)
     local entity_head_pos = entity:GetHitboxCenter(hitbox)
     local traced = EngineTrace.TraceRay(eye_pos, entity_head_pos, localplayer, 0x000000FF)
     return traced.fraction == 1
+end
+
+---Get entity's velocity
+---@param entity userdata
+---@return number float
+function utils:get_velocity(entity)
+    if type(entity) ~= "userdata" then
+        error("[utils] Invalid arguments. Expected usedata.")
+    end
+    if entity == nil then
+        return 0
+    end
+    local m_vecVelocity = entity:GetProp("m_vecVelocity")
+    return m_vecVelocity:Length2D()
+end
+
+---Get nearest player
+---@param enemy_only boolean
+---@return userdata
+function utils:get_nearest_player(enemy_only)
+    local players = EntityList.GetPlayers()
+    local localplayer = EntityList.GetLocalPlayer()
+    local localplayer_pos = localplayer:GetProp("m_vecOrigin")
+    local max_dist = 999999
+    local nearest_player = nil
+
+    for i, v  in pairs(players) do
+        local player_vec = v:GetProp("m_vecOrigin")
+        if v == localplayer or v == nil or not v:IsAlive() or v:IsTeamMate() == enemy_only then
+            goto skip
+        end
+        local dist = (player_vec - localplayer_pos):Length()
+        if dist < max_dist then
+            max_dist = dist
+            nearest_player = v
+        end
+        ::skip::
+    end
+    return nearest_player
+end
+
+---Get all teammates
+---@return table userdata
+function utils:get_all_teammates()
+    local players = EntityList.GetPlayers()
+    local teammates = {}
+    for _, player in pairs(players) do
+        if player:IsTeamMate() then
+            table.insert(teammates, player)
+        end
+    end
+    return teammates
 end
 
 ---@param instance void
