@@ -187,7 +187,7 @@ function utils:play_sound(path, volume)
     EngineClient.ExecuteClientCmd("playvol " .. path .. " " .. volume)
 end
 
----Checks if the entity is onground
+---Check if the entity is onground
 ---@param entity userdata
 ---@return boolean
 function utils:is_onground(entity)
@@ -195,7 +195,7 @@ function utils:is_onground(entity)
     return bit.band(m_fFlags, bit.lshift(1, 0)) == 1
 end
 
----Checks if the entity is inair
+---Check if the entity is inair
 ---@param entity userdata
 ---@return boolean
 function utils:is_inair(entity)
@@ -203,7 +203,7 @@ function utils:is_inair(entity)
     return bit.band(m_fFlags, bit.lshift(1, 0)) ~= 1
 end
 
----Checks if the entity is ducking
+---Check if the entity is ducking
 ---@param entity userdata
 ---@return boolean
 function utils:is_ducking(entity)
@@ -228,11 +228,11 @@ function utils:extrapolate(entity, tick)
     return extrapolated_pos
 end
 
----Get entity is visible or not
+---Check if you can shoot the entity.
 ---@param entity userdata
 ---@param hitbox number int
 ---@return boolean
-function utils:is_visible(entity, hitbox)
+function utils:is_shootable(entity, hitbox)
     if type(entity) ~= "userdata" or type(hitbox) ~= "number" then
         error("[utils] Invalid arguments. Expected number.")
     end
