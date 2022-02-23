@@ -75,6 +75,25 @@ utils:printcolor(255, 0, 0, 255, "string")
 ```
 ![image](https://cdn.discordapp.com/attachments/926558271236603987/944482617489752064/unknown.png)
 
+## is_onground
+### Checks if the entity is on ground or not.
+### parameters:
+- entity [userdata]
+> return [boolean]
+
+## is_inair
+### Checks if the entity is inair or not.
+### parameters:
+- entity [userdata]
+> return [boolean]
+
+## is_ducking
+### Checks if the entity is ducking or not.
+### parameters:
+- entity [userdata]
+> return [boolean]
+
+
 ## get_nearest_player
 ### Find the nearest player between localplayer.
 ### parameters:
@@ -115,7 +134,7 @@ print(utils:get_velocity(localplayer))
 ### parameters:
 - entity [userdata]
 - hitbox [number] int
-> return [boolean] true|false
+> return [boolean]
 ```lua
 local function draw()
     local players = EntityList.GetPlayers()
@@ -173,7 +192,7 @@ utils:play_sound("buttons/switch_press_arena_02", 1)
 - a [number] int 0 - 255 alpha
 - fontsize [number] int font size
 - font [userdata] font
-- centered [boolean] true|false centered
+- centered [boolean] centered
 - ... [string]
 ```lua
 local FONT_CALIBRI = Render.InitFont("calibri", 18, {"b"})
