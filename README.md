@@ -47,6 +47,13 @@ print(utils:clamp(5, 0, 4))
 --4
 ```
 
+## lerp
+### Linear interpolation from start to end
+### parameters:
+- n [number]
+- a [number] start
+- b [number] end
+
 ## is_module_loaded
 ### Check if a module is loaded or not.
 ### parameters:
