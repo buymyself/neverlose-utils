@@ -117,9 +117,6 @@ end
 ---@param max number
 ---@return number
 function utils:clamp(n, min, max)
-    if type(n) ~= "number" or type(min) ~= "number" or type(max) ~= "number" then
-        error("[utils] Invalid arguments. Expected number.")
-    end
     if n < min then
         return min
     elseif n > max then
@@ -129,7 +126,17 @@ function utils:clamp(n, min, max)
     end
 end 
 
----@region render
+---Linear interpolation from start to end
+---@param n number
+---@param a number
+---@param b number
+---@return number
+function utils:lerp(n, a, b)
+    if type(n) ~= "number" or type(a) ~= "number" or type(b) ~= "number" then
+        error("[utils] Invalid arguments. Expected number.")
+    end
+    return a + (b - a) * n
+end
 
 ---Draw a text with outline
 ---@param x number
