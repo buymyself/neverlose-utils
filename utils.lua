@@ -184,6 +184,13 @@ function utils:mutlicolored_text(x, y, centered, spacing, fontsize, font, data)
     end
 end
 
+---Change alpha from 0 to 1
+---@param speed number
+---@return float
+function utils:alpha_anim(speed)
+    return math.sin(math.abs(-math.pi + (globals.curtime() * speed) % (math.pi * 2)))
+end
+
 ---Plays sound
 ---@param path string
 ---@param volume number 0-1 float
