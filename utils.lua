@@ -191,6 +191,16 @@ function utils:alpha_anim(speed)
     return math.sin(math.abs(-math.pi + (globals.curtime() * speed) % (math.pi * 2)))
 end
 
+---Get distance between 2 entity
+---@param entity1 userdata
+---@param entity2 userdata
+---@return number float
+function utils:get_distance(entity1, entity2)
+    local m_vecOrigin_1 = entity1:GetProp("m_vecOrigin")
+    local m_vecOrigin_2 = entity2:GetProp("m_vecOrigin")
+    return m_vecOrigin_1:DistTo(m_vecOrigin2)
+end
+
 ---Plays sound
 ---@param path string
 ---@param volume number 0-1 float
