@@ -70,6 +70,7 @@ print(utils:is_module_loaded("nl/entities")) -- I dont have entities.lua module 
 ---false
 ```
 ## printcolor
+###### Turn off filter console. [fix later]
 ### Print colored string into console.
 ### parameters:
 - r [number] int 0 - 255
