@@ -1,3 +1,4 @@
+###### This script is outdated and will no longer be updated.
 # documentation
 ### To get started, simply download utils.lua into your nl folder.
 ### Example of usage:
