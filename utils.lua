@@ -2,7 +2,7 @@
     utils for neverlose
     [mainly for developers]
 
-    @author pred#2448 / pred14
+    NO LONGER BEING UPDATED
 ]]
 
 local ffi = require "ffi"
