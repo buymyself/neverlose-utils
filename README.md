@@ -256,4 +256,3 @@ utils:mutlicolored_text(1000, 1000, true, 3, 18, FONT_CALIBRI, {
 
 ## **Attention!**
 ###### **Please do not sell this or claim this script as yours.** 
-###### @pred14 / pred#2448
